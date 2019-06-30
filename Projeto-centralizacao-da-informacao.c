@@ -62,11 +62,11 @@ int InserirOrdenado(Celula **lista, Post d){
 			no->ant= no;
 			no->prox= no;
 			
-		} else {  //Caso n„o esteja vazia
+		} else {  //Caso n√£o esteja vazia
 		
 			do {
 				
-			aux= aux->prox; //incrementa o auxiliar para que possa percorrer toda a lista atÈ achar o local de inserir 
+			aux= aux->prox; //incrementa o auxiliar para que possa percorrer toda a lista at√© achar o local de inserir 
 			
 				if ((d.postagem.ano) < 0){  // Caso o nome inserido seja menor do que o contido na celula apontada pelo auxiliar
 				
@@ -112,10 +112,10 @@ Celula* PesquisarElemento(Celula **lista, char titulo[]){
 
 void ExibirUnico(Celula **lista, char nomeFilme[]){
 	
-	Celula* aux = PesquisarElemento(lista, nomeFilme); //FunÁ„o pesquisar retorna o elemento
+	Celula* aux = PesquisarElemento(lista, nomeFilme); //Fun√ß√£o pesquisar retorna o elemento
 		
-		if(aux == NULL){ //Caso o filme pesquisado n„o esteja no catalogo
-			printf ("\n        !!! ATENCAO: Filme nao encontrado !!!");
+		if(aux == NULL){ //Caso a postagem pesquisada n√£o esteja no catalogo
+			printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
 			return;
 		}
 		
@@ -146,13 +146,13 @@ void ExibirTudo(Celula **lista){
 				
 		}while(aux != (*lista)->prox);	
 		
-		printf("\n    --= Todos os FILMES exibidos com SUCESSO! =-- ");	
+		printf("\n    --= Todos as POSTAGENS exibidas com SUCESSO! =-- ");	
 }
 
 int RemoverElemento(Celula **lista, Post d){
 	
 	
-	 	if (listaVazia(lista)){ //VerificaÁ„o da lista vazia
+	 	if (listaVazia(lista)){ //Verifica√ß√£o da lista vazia
 	 		printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
 	 		return 0;
 	 	}
@@ -201,9 +201,9 @@ void PostagemDeDestaque(Celula **lista, char titulo[]){
 			return;
 		}
 	
-	Celula* aux = PesquisarElemento(lista, titulo);  //FunÁ„o pesquisar retorna o elemento
+	Celula* aux = PesquisarElemento(lista, titulo);  //Fun√ß√£o pesquisar retorna o elemento
 
-		if(aux == NULL){ //Caso o filme pesquisado n„o esteja no catalogo
+		if(aux == NULL){ //Caso a postagem pesquisada n√£o exista
 			printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
 			return;
 		}	
@@ -212,7 +212,7 @@ void PostagemDeDestaque(Celula **lista, char titulo[]){
 			
 			(*lista)= (*lista)->ant; //se passa o ponteiro lista para seu anterior, fazendo dele o novo ultimo elemento
 			
-		}else{ //Caso n„o seja o ultimo elemento
+		}else{ //Caso n√£o seja o ultimo elemento
 				aux->prox->ant = aux -> ant;
 				aux->ant->prox = aux->prox;
 				aux->prox = (*lista)->prox;
@@ -249,7 +249,7 @@ void informacao(){
    	printf ("               --Desenvolvido por:--\n");
    	printf ("          Diego Willian Lima Queiroz - 5222\n");
    	printf ("          Matheus Medeiros Santana - 5188\n");
-   	printf ("            --Professora orientadora:--\n");
+   	printf ("            --Professor orientador:--\n");
    	printf ("             Joao Batista");
 	
 }
@@ -268,9 +268,6 @@ int main(){
 		printf("\n");
 		printf("  ----=======  PCI - Plataforma de Centralizacao de Informacao  =======----");
 
-		printf("Hor%crio do sistema: %s\n",160,timeStr);
-		system("date /t");
-		
 		do{
 		
 		do{
