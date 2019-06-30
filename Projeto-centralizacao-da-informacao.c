@@ -1,20 +1,11 @@
-#include <stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include <time.h>
-
-typedef struct sData{
-	
-	int dia;
-	int mes;
-	int ano;
-	
-}Data;
+#include <locale.h> //Biblioteca acento 
 
 typedef struct sPost{
 	
-	char titulo[50], descricao[500];
-	Data postagem;
+	char titulo[50], descricao[5000];
 	
 }Post;
 
@@ -62,20 +53,18 @@ int InserirOrdenado(Celula **lista, Post d){
 			no->ant= no;
 			no->prox= no;
 			
-		} else {  //Caso nÃ£o esteja vazia
+		} else {  //Caso não esteja vazia
 		
 			do {
 				
-			aux= aux->prox; //incrementa o auxiliar para que possa percorrer toda a lista atÃ© achar o local de inserir 
+			aux= aux->prox; //incrementa o auxiliar para que possa percorrer toda a lista até achar o local de inserir 
 			
-				if ((d.postagem.ano) < 0){  // Caso o nome inserido seja menor do que o contido na celula apontada pelo auxiliar
-				
 					no->ant= aux->ant;
 					no->prox= aux;
 					no->ant->prox= no;
 					aux->ant= no;
 					return 1;
-				}
+			
 				
 			} while (aux != (*lista)); 
 		
@@ -101,7 +90,7 @@ Celula* PesquisarElemento(Celula **lista, char titulo[]){
 		do {
 			if (strcmp(titulo, aux->info.titulo) == 0){	//caso a palavra procurada seja a mesma que contida no campo info da celula apontada pelo auxiliar	
 			return aux;
-		}
+			}
 		
 			aux= aux->prox; 
 		
@@ -110,19 +99,18 @@ Celula* PesquisarElemento(Celula **lista, char titulo[]){
 	return 0;
 }
 
-void ExibirUnico(Celula **lista, char nomeFilme[]){
+void ExibirUnico(Celula **lista, char nomePostagem[]){
 	
-	Celula* aux = PesquisarElemento(lista, nomeFilme); //FunÃ§Ã£o pesquisar retorna o elemento
+	Celula* aux = PesquisarElemento(lista, nomePostagem); //Função pesquisar retorna o elemento
 		
-		if(aux == NULL){ //Caso a postagem pesquisada nÃ£o esteja no catalogo
-			printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
+		if(aux == NULL){ //Caso a postagem pesquisada não exista
+			printf ("\n        !!! ATENCAO: Postagem não encontrada !!!");
 			return;
 		}
 		
 	printf ("\n");
 	printf (" -- Titulo: %s\n", aux->info.titulo);
-	printf (" Descricao: %s\n", aux->info.descricao);
-			
+	printf (" Descricao: %s\n", aux->info.descricao);			
 	
 }
 
@@ -152,7 +140,7 @@ void ExibirTudo(Celula **lista){
 int RemoverElemento(Celula **lista, Post d){
 	
 	
-	 	if (listaVazia(lista)){ //VerificaÃ§Ã£o da lista vazia
+	 	if (listaVazia(lista)){ //Verificação da lista vazia
 	 		printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
 	 		return 0;
 	 	}
@@ -163,8 +151,6 @@ int RemoverElemento(Celula **lista, Post d){
 	 	if (aux == (*lista)){ 
 	 		
 	 		if (strcmp(d.titulo, aux->info.titulo) == 0){ 
-			
-			
 				
 			(*lista) = NULL;
 			free(aux);
@@ -201,9 +187,9 @@ void PostagemDeDestaque(Celula **lista, char titulo[]){
 			return;
 		}
 	
-	Celula* aux = PesquisarElemento(lista, titulo);  //FunÃ§Ã£o pesquisar retorna o elemento
+	Celula* aux = PesquisarElemento(lista, titulo);  //Função pesquisar retorna o elemento
 
-		if(aux == NULL){ //Caso a postagem pesquisada nÃ£o exista
+		if(aux == NULL){ //Caso a postagem pesquisada não exista
 			printf ("\n        !!! ATENCAO: Postagem nao encontrada !!!");
 			return;
 		}	
@@ -212,7 +198,7 @@ void PostagemDeDestaque(Celula **lista, char titulo[]){
 			
 			(*lista)= (*lista)->ant; //se passa o ponteiro lista para seu anterior, fazendo dele o novo ultimo elemento
 			
-		}else{ //Caso nÃ£o seja o ultimo elemento
+		}else{ //Caso não seja o ultimo elemento
 				aux->prox->ant = aux -> ant;
 				aux->ant->prox = aux->prox;
 				aux->prox = (*lista)->prox;
@@ -225,15 +211,15 @@ void PostagemDeDestaque(Celula **lista, char titulo[]){
 
 void menu(){
 	
-	printf ("\n\n\n        ------------=== MENU ===------------\n");
-	printf ("           Escolha umas das opcoes abaixo:\n");		
-	printf ("\n           [1] Escrever uma postagem");
-	printf ("\n           [2] Remover uma postagem");			
-	printf ("\n           [3] Pesquisar uma postagem");
-	printf ("\n           [4] Exibir todas as postagens");
-	printf ("\n           [5] Selecionar postagem de destaque");
-	printf ("\n           [6] Informacoes do projeto");
-	printf ("\n           [7] Sair do sistema");
+	printf ("\n                 ------------=== MENU ===------------\n");
+	printf ("                    Escolha umas das opções abaixo:\n");		
+	printf ("\n                    [1] Escrever uma postagem");
+	printf ("\n                    [2] Remover uma postagem");			
+	printf ("\n                    [3] Pesquisar uma postagem");
+	printf ("\n                    [4] Exibir todas as postagens");
+	printf ("\n                    [5] Selecionar postagem de destaque");
+	printf ("\n                    [6] Informações do projeto");
+	printf ("\n                    [7] Sair do sistema");
 	
 }
 
@@ -242,32 +228,55 @@ void informacao(){
 	printf ("\n\n      ---====  INFORMACOES DO PROJETO  ====---\n\n");
    	printf ("              -== Sobre o projeto: ==-\n");
    	printf ("   Esse  sistema  tem  como objetivo ser  uma plataforma\n");
-   	printf ("   de centralizacao das informacoes da Universidade\n");
-   	printf ("   Federal de Vicosa campus Rio Paranaiba!\n");
+   	printf ("   de centralização das informações da Universidade\n");
+   	printf ("   Federal de Viçosa campus Rio Paranaíba!\n");
    			
    	printf ("              -== Sobre o sistema: ==-\n");
    	printf ("               --Desenvolvido por:--\n");
    	printf ("          Diego Willian Lima Queiroz - 5222\n");
    	printf ("          Matheus Medeiros Santana - 5188\n");
    	printf ("            --Professor orientador:--\n");
-   	printf ("             Joao Batista");
+   	printf ("                  Joao Batista");
 	
 }
 
 int main(){
 	
+	setlocale(LC_ALL, "Portuguese"); //Faz alterar a linguagem para portugues
+	system("mode con: cols=75 lines=40"); //Redimensiona o tamanho da tela de execução
+	system("color 70");//muda a cor
+	
 	Celula *ptr;
 	Post d;
 	inicializar(&ptr);
 	int num;
-	char dateStr[9];
-    char timeStr[9];
-	_strdate(dateStr);
-    _strtime(timeStr);
+	
+	printf("\n"); 
+	printf("  =====================================================================\n");
+	printf("  ||                     SEJA BEM VINDO(A) AO                         || \n");
+	printf("  ||         PCI - Plataforama de centralização de informação         || \n");
+	printf("  =====================================================================\n");
+	
+		Post e;//Exemplos de postagens do programa
+		Post f;
+		Post g;
+		
+		strcpy(e.titulo, "Exemplo 3");
+		strcpy(e.descricao, "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.");
 
-		printf("\n");
-		printf("  ----=======  PCI - Plataforma de Centralizacao de Informacao  =======----");
+		InserirOrdenado(&ptr,e);
+		
+		strcpy(f.titulo, "Exemplo 2");
+		strcpy(f.descricao, "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.");
 
+		InserirOrdenado(&ptr,f);
+		
+		strcpy(g.titulo, "Exemplo 1");
+		strcpy(g.descricao, "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.");
+
+		InserirOrdenado(&ptr,g);
+		
+		
 		do{
 		
 		do{
@@ -282,9 +291,6 @@ int main(){
 			switch (num){
 			
    				case 1:
-   					d.postagem.ano = -1;
-   					d.postagem.dia = -1;
-   					d.postagem.mes = -1;
 
 					printf("\n\n      ---====  CADASTRAR NOVA POSTAGEM  ====---\n\n");	
    					printf(" - Titulo: ");		
@@ -350,7 +356,7 @@ int main(){
 		  			 break;
 		   	
   				default:
-  					printf ("\n        !!! ATENCAO: Opcao invalida, tente novamente !!!");
+  					printf ("\n        !!! ATENCAO: Opção invalida, tente novamente !!!");
   					num=0;
   					break;
   			}
